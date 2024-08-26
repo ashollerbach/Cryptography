@@ -58,4 +58,4 @@ plt.show()
 
 for item in pd.DataFrame.itertuples(df):
   print(item)
-  print(item, " --> ", freqletters[item.index])
+  print(item, " --> ", freqletters[])
