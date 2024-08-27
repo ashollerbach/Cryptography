@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 file = open("Python/ciphertext.txt", "rt")
 
 #letters in order of frequency
-freqletters = "eitoasnrlcudpmhgbfywkvxzjq"
+freqletters = "etanioshrcdflmpuygwbxvkzjq"
 
 #dictionary to store the frequency of each letter
 freq = {'a': 0, 
