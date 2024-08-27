@@ -1,11 +1,12 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-file = open("ciphertext.txt", "rt")
+file = open("Python/ciphertext.txt", "rt")
 
-freqletters = "eariotnslcudpmhgbfywkvxzjq"
+#letters in order of frequency
+freqletters = "eitoasnrlcudpmhgbfywkvxzjq"
 
-
+#dictionary to store the frequency of each letter
 freq = {'a': 0, 
         'b': 0,
         'c': 0,
@@ -34,7 +35,7 @@ freq = {'a': 0,
         'z': 0}
 
 
-
+#count the frequency of each letter in the file
 for line in file:
   line = line.strip()
   for letter in line:
@@ -53,9 +54,40 @@ plt.bar(df.index, df['Frequency'])
 plt.xlabel('Letter')
 plt.ylabel('Frequency')
 plt.title('Frequency of Letters')
-plt.show()
+#plt.show()
 
 
-for item in pd.DataFrame.itertuples(df):
-  print(item)
-  print(item, " --> ", freqletters[])
+#create a decrypted file
+
+#need to create a keymap
+#need to iterate through the encrypted file and replace each letter with its match
+#need to write the decrypted file
+
+keymap = pd.DataFrame()
+
+data = []
+for index, item in enumerate(pd.DataFrame.itertuples(df)):
+  #print(item[0], " --> ", freqletters[index])
+  data.append([item[0], freqletters[index]])
+
+keymap = pd.DataFrame(data, columns=['Encrypted', 'Decrypted'])
+
+
+decrypted_text = ""
+
+file = open("Python/ciphertext.txt", "rt")
+
+for line in file:
+  line = line.strip()
+  for letter in line:
+    if letter in keymap['Encrypted'].values:
+      row = keymap.loc[keymap['Encrypted'] == letter]
+      decrypted_text += row['Decrypted'].values[0]
+    else:
+      decrypted_text += letter
+
+print(decrypted_text)
+
+decrypted_file = open("Python/decrypted.txt", "wt")
+decrypted_file.write(decrypted_text)
+decrypted_file.close()
